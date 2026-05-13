@@ -1,0 +1,29 @@
+server:
+  port: 9000
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: pet-user-service
+          uri: lb://pet-user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+        - id: pet-order-service
+          uri: lb://pet-order-service
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway

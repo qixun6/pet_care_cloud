@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: pet-gateway
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      discovery:
+        namespace: ${NACOS_NAMESPACE:}
+      config:
+        namespace: ${NACOS_NAMESPACE:}
+        file-extension: yml

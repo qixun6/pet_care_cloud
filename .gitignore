@@ -1,0 +1,11 @@
+target/
+*.iml
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+logs/
+*.log
+.mvn/local-settings.xml
+.m2/

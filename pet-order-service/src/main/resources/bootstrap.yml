@@ -17,3 +17,6 @@
         namespace: ${NACOS_NAMESPACE:}
         file-extension: yml
 
+#    loadbalancer:
+#      nacos:
+#        enabled: true   # 开启 Nacos 权重功能

@@ -1,11 +1,19 @@
-spring:
+﻿spring:
   application:
     name: pet-order-service
   cloud:
     nacos:
-      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      #      集群 + nginx反向代理
+      #      由于nacos和nginx端口不规范，需要加一下虚拟机选项 -Dnacos.server.grpc.port.offset=11768
+      #      server-addr: ${NACOS_SERVER_ADDR:115.190.90.78:8080}
+      #      单机
+      server-addr: ${NACOS_SERVER_ADDR:115.190.90.78:8848}
+      #      本地启动
+      #      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
       discovery:
         namespace: ${NACOS_NAMESPACE:}
+      #        ephemeral: false #永久实例 哪怕宕机了也不会删除实例，搭配保护阈值使用（0 ~ 1）
       config:
         namespace: ${NACOS_NAMESPACE:}
         file-extension: yml
+

@@ -1,0 +1,43 @@
+spring:
+  application:
+    # 会自动根据服务名拉取dataid对应的配置文件,如果dataid不一样需要手动指定配置文件名
+    # 默认的配置文件：根服务名相同的dataid的配置文件
+    # 除了默认的配置文件，其他配置文件必须写上后缀。
+    name: pet-user-service
+  cloud:
+    nacos:
+      #      集群 + nginx反向代理
+      #      由于nacos和nginx端口不规范，需要加一下虚拟机选项 -Dnacos.server.grpc.port.offset=11768
+#      server-addr: ${NACOS_SERVER_ADDR:115.190.90.78:8080}
+      #      单机
+      server-addr: ${NACOS_SERVER_ADDR:115.190.90.78:8848}
+      #      本地启动
+      #      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      discovery:
+        namespace: 6c6c5cce-dab1-4448-880c-3dbb8e00f1a4
+      #        ephemeral: false #永久实例 哪怕宕机了也不会删除实例，搭配保护阈值使用（0 ~ 1）
+      username: nacos
+      password: nacos
+      config:
+        namespace: 6c6c5cce-dab1-4448-880c-3dbb8e00f1a4
+        # nacos客户端默认的配置文件扩展名是properties (只针对默认配置文件和profile)
+        file-extension: yml
+        group: petcare
+        # 关闭动态刷新
+        shared-configs:
+          - data-id: com.petcare.common.yml
+            refresh: true
+            #group: 默认是DEFAULT-GROUP
+          - data-id: com.petcare.common02.yml
+            refresh: true
+        extension-configs[0]:
+          data-id: com.petcare.common03.yml
+          refresh: true
+        extension-configs[1]:
+          data-id: com.petcare.common04.yml
+          refresh: true
+#        refresh-enabled: false
+
+# 配置文件的优先级
+#  优先级大的会覆盖优先级小的，并且会形成互补
+# profile > 默认配置文件 > extension-configs(下标越大优先级越大) > shared-configs(下标越大优先级越大)

@@ -7,15 +7,17 @@ public class OrderDTO {
     private String itemName;
     private BigDecimal amount;
     private UserDTO user;
+    private ProductDTO product;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(Long id, String itemName, BigDecimal amount, UserDTO user) {
+    public OrderDTO(Long id, String itemName, BigDecimal amount, UserDTO user, ProductDTO product) {
         this.id = id;
         this.itemName = itemName;
         this.amount = amount;
         this.user = user;
+        this.product = product;
     }
 
     public Long getId() {
@@ -48,5 +50,13 @@ public class OrderDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    public ProductDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 }

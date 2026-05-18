@@ -1,6 +1,9 @@
-﻿spring:
+server:
+  port: 8083
+
+spring:
   application:
-    name: pet-order-service
+    name: pet-product-service
   cloud:
     nacos:
       #      集群 + nginx反向代理
@@ -17,6 +20,8 @@
         namespace: ${NACOS_NAMESPACE:}
         file-extension: yml
 
-#    loadbalancer:
-#      nacos:
-#        enabled: true   # 开启 Nacos 权重功能
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

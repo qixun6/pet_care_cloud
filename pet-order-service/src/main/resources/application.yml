@@ -1,8 +1,52 @@
 server:
   port: 8082
 
+spring:
+  application:
+    name: pet-order-service
+  cloud:
+    nacos:
+      #      集群 + nginx反向代理
+      #      由于nacos和nginx端口不规范，需要加一下虚拟机选项 -Dnacos.server.grpc.port.offset=11768
+      #      server-addr: ${NACOS_SERVER_ADDR:115.190.90.78:8080}
+      #      单机
+      server-addr: ${NACOS_SERVER_ADDR:115.190.90.78:8848}
+      #      本地启动
+      #      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      discovery:
+        namespace: ${NACOS_NAMESPACE:}
+      #        ephemeral: false #永久实例 哪怕宕机了也不会删除实例，搭配保护阈值使用（0 ~ 1）
+      config:
+        namespace: ${NACOS_NAMESPACE:}
+        file-extension: yml
+
+#    loadbalancer:
+#      nacos:
+#        enabled: true   # 开启 Nacos 权重功能
+
+
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
+# springboot默认的日志级别是info，feign的debug日志级别就不会输入
+logging:
+  level:
+    com.petcare.order.feign: debug
+
+# feign日志局部配置
+feign:
+  client:
+    config:
+      pet-product-service:
+        logger-level: BASIC
+        # 设置为默认的契约 （还原成feign原生注解）
+        contract: feign.Contract.Default
+        # 连接超时时间，默认2S
+        connect-timeout: 5000
+        # 读取超时时间，默认5S (连接服务之后，服务的处理时间)
+        read-timeout: 3000
+        request-interceptors:
+          - com.petcare.order.interceptor.feign.CustomFeignInterceptor

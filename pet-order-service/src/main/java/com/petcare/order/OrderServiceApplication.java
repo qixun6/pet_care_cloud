@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 // 自定义负载均衡策略
-@LoadBalancerClient(name = "pet-user-service", configuration = LoadBalancerConfig.class)
+//@LoadBalancerClient(name = "pet-user-service", configuration = LoadBalancerConfig.class)
 //@LoadBalancerClients({
 //        @LoadBalancerClient(name = "serviceA", configuration = LoadBalancerConfig.class),
 //        @LoadBalancerClient(name = "serviceB", configuration = LoadBalancerConfig.class)

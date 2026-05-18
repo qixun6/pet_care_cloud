@@ -17,6 +17,7 @@
         <module>pet-user-service</module>
         <module>pet-order-service</module>
         <module>pet-gateway</module>
+        <module>pet-product-service</module>
     </modules>
 
     <properties>

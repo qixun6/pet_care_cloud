@@ -37,7 +37,7 @@ public class IpHashLoadBalancer implements ReactorServiceInstanceLoadBalancer {
             }
 
             ServiceInstance selected = ipHash(clientIp, instances);
-            System.out.println("Client IP: " + clientIp + " -> Selected: " + selected.getHost() + ":" + selected.getPort());
+//            System.out.println("Client IP: " + clientIp + " -> Selected: " + selected.getHost() + ":" + selected.getPort());
             return new DefaultResponse(selected);
         });
     }

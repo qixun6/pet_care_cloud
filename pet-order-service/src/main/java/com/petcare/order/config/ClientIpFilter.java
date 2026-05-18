@@ -35,7 +35,7 @@ public class ClientIpFilter extends OncePerRequestFilter {
             }
             // 存入 ThreadLocal
             ClientIpHolder.setIp(ip);
-            System.out.println("Request from IP: " + ip); // 日志查看真实 IP
+//            System.out.println("Request from IP: " + ip); // 日志查看真实 IP
 
             // 继续执行过滤器链
             filterChain.doFilter(request, response);
